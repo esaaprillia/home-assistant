@@ -1,5 +1,6 @@
 # SPDX-FileCopyrightText: 2024-2025 Pascal Brogle @broglep
 # SPDX-FileCopyrightText: 2025 Hendrik @novag
+# SPDX-FileCopyrightText: 2025 Ovidiu D. Nițan @ov1d1u
 #
 # SPDX-License-Identifier: MIT
 
@@ -1059,6 +1060,7 @@ class MeshInterface:
         want_ack: bool = False,
         channel_index: int | None = None,
         priority: MeshPacket.Priority | None = None,
+        reply_id: int | None = None,
         on_message_sent: Callable[[Packet], Awaitable[None]] | None = None,
     ) -> None:
         if isinstance(destination, MeshNode):
@@ -1106,6 +1108,7 @@ class MeshInterface:
             priority=priority or (MeshPacket.Priority.RELIABLE if want_ack else MeshPacket.Priority.DEFAULT),
             want_response=False,
             ack=want_ack,
+            reply_id=reply_id,
             out_callback=out_callback,
         )
 
